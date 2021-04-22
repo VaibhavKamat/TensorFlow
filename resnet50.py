@@ -3,6 +3,8 @@ import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Model
 from keras.layers import Dense,Flatten
+import time
+
 
 BATCH = 64
 NUM_EPOCHS = 5
@@ -23,4 +25,8 @@ output1 = new_layer1(flatten(model1.output))
 model = Model(input1, output1)
 model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(train, epochs=NUM_EPOCHS, validation_data = val)
+
+
+t1 = time.time()
 model.evaluate(val)
+print("time taken for inference is {} seconds".format(time.time()-t1)
